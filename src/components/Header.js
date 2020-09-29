@@ -15,28 +15,34 @@ const useStyles = createUseStyles((theme) => ({
     ...theme.wrappers.w1280,
   },
   navigation: {
-    ...theme.displays.flexCenter,
+    display: 'flex',
+    flexWrap: 'wrap',
+    alignItems: 'center',
     padding: `0 ${theme.spaces.md}`,
     '& svg': {
-      width: 48,
-      height: 48,
+      width: 24,
+      height: 24,
       objectFit: 'contain',
     },
     '& > div': { marginRight: theme.spaces.md },
   },
   logo: {
     ...theme.displays.flexCenter,
+    flexBasis: '100%',
+    justifyContent: 'center',
+    marginBottom: theme.spaces.sm,
     '& span': {
-      fontSize: theme.texts.xxl,
+      fontSize: theme.texts.xl,
       fontWeight: 300,
       marginLeft: theme.spaces.md,
     },
   },
   searchBar: {
     padding: `0 ${theme.spaces.md}`,
+    flex: 1,
     marginLeft: 'auto',
     '& > input': {
-      height: 48,
+      height: 24,
       padding: `0 ${theme.spaces.sm}`,
       borderRadius: 4,
       border: 0,
@@ -45,6 +51,7 @@ const useStyles = createUseStyles((theme) => ({
   },
   menu: {
     display: 'flex',
+    flex: 1,
     padding: `0 ${theme.spaces.md}`,
     '& > a': {
       display: 'flex',

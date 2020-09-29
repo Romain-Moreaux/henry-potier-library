@@ -1,6 +1,5 @@
 import React from 'react'
 import { ThemeProvider } from 'react-jss'
-import './App.css'
 import RoutesController from './components/router'
 import WebFont from 'webfontloader'
 import { themeValue } from './themeValue'
