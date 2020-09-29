@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { createUseStyles } from 'react-jss'
 import { NavLink } from 'react-router-dom'
 import { ReactComponent as Books } from '../assets/book.svg'
@@ -64,11 +64,9 @@ const useStyles = createUseStyles((theme) => ({
   },
 }))
 
-function Header() {
+function Header({ setValues }) {
   const classes = useStyles()
-  const [search, setSearch] = useState('')
-  console.log('search', search)
-  const handleChange = (e) => setSearch(e.target.value)
+  const handleChange = (e) => setValues(e.target.value)
 
   return (
     <header className={classes.header}>
