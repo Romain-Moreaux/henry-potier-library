@@ -22,12 +22,13 @@ const useStyles = createUseStyles((theme) => ({
 
 function Homepage() {
   const classes = useStyles()
-
-  const [data, setData] = useState([])
-  const [url, setUrl] = useState('http://henri-potier.xebia.fr/books')
+  const [originData, setOriginData] = useState([])
+  const [filteredData, setFilteredData] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [isError, setIsError] = useState(false)
+  const [search, setSearch] = useState('')
 
+  // Fetch datas once from api
   useEffect(() => {
     const fetchData = async () => {
       console.log('fetch datas')
@@ -35,9 +36,9 @@ function Homepage() {
       setIsLoading(true)
 
       try {
-        const result = await axios(url)
-
-        setData(result.data)
+        const result = await axios('http://henri-potier.xebia.fr/books')
+        setOriginData(result.data)
+        setFilteredData(result.data)
       } catch (error) {
         setIsError(true)
       }
@@ -46,12 +47,36 @@ function Homepage() {
     }
 
     fetchData()
-  }, [url])
+  }, [])
 
-  console.log('data', data)
+  // exclude column list from filter
+  const excludeColumns = ['cover', 'isbn']
+
+  // handle change event of search input
+  const handleChange = (value) => {
+    setSearch(value)
+    filterData(value)
+  }
+
+  // filter records by search text
+  const filterData = (value) => {
+    const lowercasedValue = value.toLowerCase().trim()
+    if (lowercasedValue === '') setFilteredData(originData)
+    else {
+      const filteredData = originData.filter((item) => {
+        return Object.keys(item).some((key) =>
+          excludeColumns.includes(key)
+            ? false
+            : item[key].toString().toLowerCase().includes(lowercasedValue)
+        )
+      })
+      setFilteredData(filteredData)
+    }
+  }
+
   return (
     <div className={classes.homepage}>
-      <Header />
+      <Header setValues={handleChange} />
       <section className={classes.container}>
         <div className={classes.productlist}>
           {isError && (
@@ -62,7 +87,7 @@ function Homepage() {
           {isLoading ? (
             <p>Ressources en chargement</p>
           ) : (
-            data.map((book) => <Product key={newId()} {...book} />)
+            filteredData.map((book) => <Product key={newId()} {...book} />)
           )}
         </div>
       </section>
