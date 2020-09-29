@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { ThemeProvider } from 'react-jss'
+import './App.css'
+import RoutesController from './components/router'
+import WebFont from 'webfontloader'
+import { themeValue } from './themeValue'
+
+WebFont.load({
+  google: {
+    families: ['Nunito Sans:300,400,600,700,800,900', 'sans-serif'],
+  },
+})
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <ThemeProvider theme={themeValue}>
+      <div className="App">
+        <RoutesController />
+      </div>
+    </ThemeProvider>
+  )
 }
 
-export default App;
+export default App
