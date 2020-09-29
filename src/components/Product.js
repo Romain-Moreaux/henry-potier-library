@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { createUseStyles } from 'react-jss'
 
@@ -37,6 +37,19 @@ const useStyles = createUseStyles((theme) => ({
 
 function Product({ isbn, title, price, cover, synopsis }) {
   const classes = useStyles()
+  const [readMore, setReadMore] = useState(false)
+  const [content, setContent] = useState()
+  const [moreContent, setMoreContent] = useState()
+
+  const generateSyp = useCallback(
+    () => setContent(synopsis.reduce((acc, val) => acc + val)),
+    [synopsis]
+  )
+
+  useEffect(() => {
+    generateSyp()
+  }, [generateSyp])
+
   return (
     <div className={classes.product}>
       <div className={classes.wrapper}>
