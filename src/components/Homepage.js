@@ -26,7 +26,6 @@ function Homepage() {
   const [filteredData, setFilteredData] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [isError, setIsError] = useState(false)
-  const [search, setSearch] = useState('')
 
   // Fetch datas once from api
   useEffect(() => {
@@ -53,10 +52,7 @@ function Homepage() {
   const excludeColumns = ['cover', 'isbn']
 
   // handle change event of search input
-  const handleChange = (value) => {
-    setSearch(value)
-    filterData(value)
-  }
+  const handleChange = (value) => filterData(value)
 
   // filter records by search text
   const filterData = (value) => {
