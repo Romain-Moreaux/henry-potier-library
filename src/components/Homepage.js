@@ -5,6 +5,7 @@ import Product from './Product'
 import axios from 'axios'
 import { newId } from '../helpers'
 import books from '../assets/books.json'
+import { useBasketContext } from './Basket'
 
 const useStyles = createUseStyles((theme) => ({
   homepage: {
@@ -29,7 +30,9 @@ function Homepage() {
   const [filteredData, setFilteredData] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [isError, setIsError] = useState(false)
+  const [{ basket }] = useBasketContext()
 
+  console.log('basket', basket)
   // Fetch datas once from api
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -90,7 +93,7 @@ function Homepage() {
           {isLoading ? (
             <p>Ressources en chargement</p>
           ) : (
-            filteredData.map((book) => <Product key={newId()} {...book} />)
+            filteredData.map((book, i) => <Product key={i} {...book} />)
           )}
         </div>
       </section>

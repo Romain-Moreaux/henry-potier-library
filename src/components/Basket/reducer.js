@@ -1,5 +1,8 @@
+import books from '../../assets/books.json'
+
 export const initialState = {
   basket: [],
+  // basket: [books[0], books[1], books[2]],
 }
 
 export const getBasketTotal = (basket) =>
@@ -12,6 +15,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         basket: [...state.basket, action.item],
+      }
+    case 'REMOVE_FROM_BASKET':
+      return {
+        ...state,
+        basket: state.basket.filter((item) => item.id !== action.id),
       }
 
     default:

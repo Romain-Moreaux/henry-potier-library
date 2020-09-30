@@ -10,8 +10,9 @@ export const themeValue = {
     yellowAlt2: '#ffb700',
     cyan: '#40a8c4',
     blueAlt: '#a2d5f2',
-    white: 'rgb(254, 254, 253)',
+    white: 'rgb(255, 255, 255)',
     whiteAlt: 'rgb(249, 251, 253)',
+    grey: '#dddddd',
   },
   displays: {
     page: {
@@ -81,7 +82,7 @@ export const themeValue = {
         boxShadow: 'rgba(9, 30, 66, 0.13) 0px 2px 1px',
       },
     },
-    add: {
+    primary: {
       background: '#ffc93c',
       color: '#07689f',
       border: '1px solid #07689f',
@@ -91,7 +92,7 @@ export const themeValue = {
       color: '#ffc93c',
       border: '1px solid #ffc93c',
     },
-    submit: {
+    secondary: {
       background: '#ffc533',
       color: 'rgb(18, 38, 63)',
       border: '1px solid',
