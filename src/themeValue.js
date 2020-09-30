@@ -2,13 +2,14 @@ export const themeValue = {
   colors: {
     raven: 'rgb(18, 38, 63)',
     green: 'rgb(0, 217, 126)',
-    greenAlt: 'rgb(0, 179, 104)',
     red: 'rgb(230, 55, 87)',
-    redAlt: 'rgb(204, 25, 58)',
     orange: 'rgb(253, 126, 20)',
-    orangeAlt: 'rgb(227, 104, 2)',
-    blue: 'rgb(44, 123, 229)',
-    blueAlt: 'rgb(25, 103, 204)',
+    blue: '#07689f',
+    yellow: '#ffc93c',
+    yellowAlt1: '#ffc533',
+    yellowAlt2: '#ffb700',
+    cyan: '#40a8c4',
+    blueAlt: '#a2d5f2',
     white: 'rgb(254, 254, 253)',
     whiteAlt: 'rgb(249, 251, 253)',
   },
@@ -17,10 +18,6 @@ export const themeValue = {
       flex: 1,
       display: 'flex',
       flexDirection: 'column',
-    },
-    flexCenter: {
-      display: 'flex',
-      alignItems: 'center',
     },
   },
   breakpoints: {
@@ -64,29 +61,19 @@ export const themeValue = {
       marginRight: 'auto',
     },
   },
-  sections: {
-    int: {
-      display: 'flex',
-      alignItems: 'center',
-      minHeight: '100vh',
-    },
-  },
-  boxes: {
-    left: { flex: 1 },
-    right: { flex: 1 },
-  },
   buttons: {
     prototype: {
       outline: 0,
       border: 0,
-      borderRadius: 4,
+      borderRadius: 30,
       color: 'white',
+      fontWeight: 600,
       cursor: 'pointer',
       fontFamily: 'inherit',
       fontSize: 'inherit',
-      lineHeight: '3.5rem',
-      paddingLeft: '1.3rem',
-      paddingRight: '1.3rem',
+      lineHeight: '3.2rem',
+      paddingLeft: '1.2rem',
+      paddingRight: '1.2rem',
       transition:
         'box-shadow 150ms cubic-bezier(0.2, 0, 0, 1) 0s, transform 150ms cubic-bezier(0.2, 0, 0, 1) 0s',
       '&:hover': {
@@ -94,27 +81,26 @@ export const themeValue = {
         boxShadow: 'rgba(9, 30, 66, 0.13) 0px 2px 1px',
       },
     },
-    default: {
-      background:
-        'linear-gradient(to right bottom, rgb(254, 254, 253), rgb(249, 251, 253)) left top no-repeat',
+    add: {
+      background: '#ffc93c',
+      color: '#07689f',
+      border: '1px solid #07689f',
+    },
+    offer: {
+      background: '#07689f',
+      color: '#ffc93c',
+      border: '1px solid #ffc93c',
+    },
+    submit: {
+      background: '#ffc533',
       color: 'rgb(18, 38, 63)',
-      border: '1px solid rgb(18, 38, 63)',
+      border: '1px solid',
+      borderColor: '#ffc533 #ffc93c #ffb700',
     },
-    success: {
-      background:
-        'linear-gradient(to right bottom, rgb(0, 217, 126), rgb(0, 204, 119)) left top no-repeat',
-    },
-    info: {
-      background:
-        'linear-gradient(to right bottom, rgb(44, 123, 229), rgb(25, 103, 204)) left top no-repeat',
-    },
-    error: {
-      background:
-        'linear-gradient(to right bottom, rgb(230, 55, 87), rgb(204, 25, 58)) left top no-repeat',
-    },
-    warning: {
-      background:
-        'linear-gradient(to right bottom, rgb(253, 126, 20), rgb(227, 104, 2)) left top no-repeat',
+  },
+  links: {
+    isActive: {
+      color: '#ffc93c',
     },
   },
   spaces: {
