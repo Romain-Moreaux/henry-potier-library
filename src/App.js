@@ -3,6 +3,7 @@ import { ThemeProvider } from 'react-jss'
 import RoutesController from './components/router'
 import WebFont from 'webfontloader'
 import { themeValue } from './themeValue'
+import BasketProvider from './components/Basket'
 
 WebFont.load({
   google: {
@@ -13,9 +14,11 @@ WebFont.load({
 function App() {
   return (
     <ThemeProvider theme={themeValue}>
-      <div className="App">
-        <RoutesController />
-      </div>
+      <BasketProvider>
+        <div className="App">
+          <RoutesController />
+        </div>
+      </BasketProvider>
     </ThemeProvider>
   )
 }
