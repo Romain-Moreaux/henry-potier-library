@@ -14,7 +14,7 @@ const useStyles = createUseStyles((theme) => ({
     padding: theme.spaces.md,
 
     backgroundColor: '#fff',
-    border: '1px solid #dddddd',
+    border: `1px solid ${theme.colors.grey}`,
     borderRadius: 4,
     '& p': { color: theme.colors.raven },
   },
@@ -41,7 +41,7 @@ function SubTotal() {
               <input type="checkbox" />
               this order contain a gift
             </small>
-            <Button model="submit">Procced to checkout</Button>
+            <Button model="secondary">Procced to checkout</Button>
           </>
         )}
         decialScale={2}

@@ -27,7 +27,7 @@ Button.defaultProps = {
 }
 
 Button.propTypes = {
-  model: PropTypes.oneOf(['add', 'remove', 'submit', 'offer']),
+  model: PropTypes.oneOf(['primary', 'secondary', 'submit', 'cta']),
   cb: PropTypes.func,
   children: PropTypes.node,
 }

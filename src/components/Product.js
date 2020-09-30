@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { createUseStyles } from 'react-jss'
 import Button from './Button'
 import { useBasketContext } from './Basket'
+import { newId } from '../helpers'
 
 const useStyles = createUseStyles((theme) => ({
   product: {
@@ -46,7 +47,7 @@ const useStyles = createUseStyles((theme) => ({
   price: {
     color: theme.colors.blue,
     fontSize: theme.texts.lg,
-    fontWeight: 600,
+    fontWeight: 800,
   },
   image: {
     '& > img': { maxHeight: 175 },
@@ -84,6 +85,7 @@ function Product({ isbn, title, price, cover, synopsis }) {
     dispatch({
       type: 'ADD_TO_BASKET',
       item: {
+        id: newId(),
         isbn,
         title,
         price,
@@ -118,7 +120,7 @@ function Product({ isbn, title, price, cover, synopsis }) {
             {readMore ? 'Lire moins' : 'Lire plus'}
           </span>
         </div>
-        <Button model="add" cb={addToBasket}>
+        <Button model="primary" cb={addToBasket}>
           Ajouter au panier
         </Button>
       </div>

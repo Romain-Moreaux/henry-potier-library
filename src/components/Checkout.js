@@ -1,5 +1,6 @@
 import React from 'react'
 import { createUseStyles } from 'react-jss'
+import BasketProduct, { useBasketContext } from './Basket'
 import Button from './Button'
 import Header from './Header'
 import SubTotal from './SubTotal'
@@ -14,6 +15,11 @@ const useStyles = createUseStyles((theme) => ({
   shopCart: {
     display: 'flex',
     flexWrap: 'wrap',
+    backgroundColor: theme.colors.white,
+    margin: `${theme.spaces.lg} 0`,
+    padding: `${theme.spaces.lg}`,
+    border: `1px solid ${theme.colors.grey}`,
+    borderRadius: 4,
   },
   boxLeft: { flex: 1 },
   boxRight: { flex: 1 },
@@ -22,6 +28,11 @@ const useStyles = createUseStyles((theme) => ({
     backgroundColor: theme.colors.white,
     padding: `${theme.spaces.md} ${theme.spaces.sm}`,
     textAlign: 'center',
+  },
+  title: {
+    paddingBottom: theme.spaces.md,
+    marginBottom: theme.spaces.lg,
+    borderBottom: `1px solid ${theme.colors.grey}`,
   },
   texts: {
     color: theme.colors.raven,
@@ -37,11 +48,17 @@ const useStyles = createUseStyles((theme) => ({
     displays: 'flex',
     flexDirection: 'column',
   },
-  productList: {},
+  productList: {
+    padding: `${theme.spaces.lg} 0`,
+    display: 'flex',
+    flexDirection: 'column',
+    '& > div': { marginBottom: theme.spaces.md },
+  },
 }))
 
 function Checkout() {
   const classes = useStyles()
+  const [{ basket }] = useBasketContext()
   return (
     <div className={classes.checkout}>
       <Header />
@@ -55,12 +72,14 @@ function Checkout() {
                   Publicis Sapient Engineering
                 </span>
               </div>
-              <Button model="offer">En savoir plus :)</Button>
+              <Button model="cta">En savoir plus :)</Button>
             </div>
             <div className={classes.basket}>
-              <h2>Your Shopping Basket</h2>
+              <h2 className={classes.title}>Your Shopping Basket</h2>
               <div className={classes.productList}>
-                products products products products
+                {basket?.map((item, i) => (
+                  <BasketProduct key={i} {...item} />
+                ))}
               </div>
             </div>
           </div>
