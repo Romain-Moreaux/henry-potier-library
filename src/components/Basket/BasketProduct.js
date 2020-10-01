@@ -43,12 +43,12 @@ export function BasketProduct({ id, title, price, cover }) {
   return (
     <div className={classes.basket}>
       <div className={classes.cover}>
-        <img src={cover} alt="#" />
+        <img src={cover} alt={`couverture du livre: "${title}"`} />
       </div>
       <div className={classes.informations}>
         <span className={classes.title}>{title}</span>
         <span className={classes.price}>€{price}</span>
-        <Button model="secondary" cb={handleRemove}>
+        <Button model="primary" cb={handleRemove}>
           Retirer du panier
         </Button>
       </div>

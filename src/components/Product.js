@@ -75,7 +75,7 @@ function Product({ isbn, title, price, cover, synopsis }) {
   const [, dispatch] = useBasketContext()
 
   const makeContent = useCallback(
-    () => setContent(synopsis.reduce((acc, val) => acc + val)),
+    () => setContent(synopsis.reduce((a, v) => a + v)),
     [synopsis]
   )
 

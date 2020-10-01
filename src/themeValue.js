@@ -66,13 +66,13 @@ export const themeValue = {
     prototype: {
       outline: 0,
       border: 0,
-      borderRadius: 30,
+      borderRadius: 4,
       color: 'white',
       fontWeight: 600,
       cursor: 'pointer',
       fontFamily: 'inherit',
       fontSize: 'inherit',
-      lineHeight: '3.2rem',
+      lineHeight: '3rem',
       paddingLeft: '1.2rem',
       paddingRight: '1.2rem',
       transition:
@@ -85,18 +85,13 @@ export const themeValue = {
     primary: {
       background: '#ffc93c',
       color: '#07689f',
-      border: '1px solid #07689f',
-    },
-    offer: {
-      background: '#07689f',
-      color: '#ffc93c',
-      border: '1px solid #ffc93c',
+      border: '1px solid',
+      borderColor: '#ffc93c #ffc533 #ffb700',
     },
     secondary: {
-      background: '#ffc533',
-      color: 'rgb(18, 38, 63)',
-      border: '1px solid',
-      borderColor: '#ffc533 #ffc93c #ffb700',
+      background: '#07689f',
+      color: '#ffc93c',
+      border: '1px solid #07689f',
     },
   },
   links: {

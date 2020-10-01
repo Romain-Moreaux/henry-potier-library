@@ -16,37 +16,44 @@ const useStyles = createUseStyles((theme) => ({
     display: 'flex',
     flexWrap: 'wrap',
     backgroundColor: theme.colors.white,
-    margin: `${theme.spaces.lg} 0`,
-    padding: `${theme.spaces.lg}`,
+    margin: `0 0 ${theme.spaces.lg}`,
+    padding: `0 ${theme.spaces.lg} ${theme.spaces.lg}`,
     border: `1px solid ${theme.colors.grey}`,
     borderRadius: 4,
   },
-  boxLeft: { flex: 1 },
-  boxRight: { flex: 1 },
-  ad: {
-    width: '100%',
-    backgroundColor: theme.colors.white,
-    padding: `${theme.spaces.md} ${theme.spaces.sm}`,
-    textAlign: 'center',
+  boxLeft: {
+    flexBasis: '100%',
   },
+  boxRight: { flex: 1 },
   title: {
     paddingBottom: theme.spaces.md,
     marginBottom: theme.spaces.lg,
     borderBottom: `1px solid ${theme.colors.grey}`,
   },
+  ad: {
+    background: `linear-gradient(to right bottom, ${theme.colors.yellow}, ${theme.colors.yellowAlt1}, ${theme.colors.yellowAlt2}) left top no-repeat`,
+    padding: `${theme.spaces.md} ${theme.spaces.sm}`,
+    margin: `0 -${theme.spaces.lg}`,
+    display: 'flex',
+    '& > button': {
+      flex: 1,
+      marginLeft: theme.spaces.md,
+    },
+  },
   texts: {
-    color: theme.colors.raven,
+    color: theme.colors.whiteAlt,
     fontSize: theme.texts.md,
   },
   strong: {
-    fontSize: theme.texts.lg,
-    color: theme.colors.cyan,
+    display: 'flex',
+    fontSize: theme.texts.md,
+    color: theme.colors.blue,
     fontWeight: 600,
-    marginLeft: theme.spaces.md,
   },
   basket: {
-    displays: 'flex',
+    display: 'flex',
     flexDirection: 'column',
+    marginTop: theme.spaces.lg,
   },
   productList: {
     padding: `${theme.spaces.lg} 0`,
@@ -59,6 +66,7 @@ const useStyles = createUseStyles((theme) => ({
 function Checkout() {
   const classes = useStyles()
   const [{ basket }] = useBasketContext()
+
   return (
     <div className={classes.checkout}>
       <Header />
@@ -72,7 +80,7 @@ function Checkout() {
                   Publicis Sapient Engineering
                 </span>
               </div>
-              <Button model="cta">En savoir plus :)</Button>
+              <Button model="secondary">En savoir plus :)</Button>
             </div>
             <div className={classes.basket}>
               <h2 className={classes.title}>Your Shopping Basket</h2>

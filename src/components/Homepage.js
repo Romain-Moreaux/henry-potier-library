@@ -2,11 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { createUseStyles } from 'react-jss'
 import Header from './Header'
 import Product from './Product'
-import axios from 'axios'
-import { newId } from '../helpers'
+// import useFetchApi from './useFetch'
 import books from '../assets/books.json'
-import { useBasketContext } from './Basket'
-
 const useStyles = createUseStyles((theme) => ({
   homepage: {
     ...theme.displays.page,
@@ -22,37 +19,22 @@ const useStyles = createUseStyles((theme) => ({
     display: 'flex',
     flexWrap: 'wrap',
   },
+  statusIndicator: {
+    fontSize: theme.texts.lg,
+    textAlign: 'center',
+    fontWeight: 600,
+  },
 }))
 
 function Homepage() {
   const classes = useStyles()
-  const [originData, setOriginData] = useState(books)
   const [filteredData, setFilteredData] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
-  const [isError, setIsError] = useState(false)
-  const [{ basket }] = useBasketContext()
-
-  console.log('basket', basket)
-  // Fetch datas once from api
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     console.log('fetch datas')
-  //     setIsError(false)
-  //     setIsLoading(true)
-
-  //     try {
-  //       const result = await axios('http://henri-potier.xebia.fr/books')
-  //       setOriginData(result.data)
-  //       setFilteredData(result.data)
-  //     } catch (error) {
-  //       setIsError(true)
-  //     }
-
-  //     setIsLoading(false)
-  //   }
-
-  //   fetchData()
-  // }, [])
+  let isError,
+    isLoading = false
+  // const [{ data, isLoading, isError }] = useFetchApi(
+  //   'http://henri-potier.xebia.fr/books',
+  //   []
+  // )
 
   useEffect(() => {
     setFilteredData(books)
@@ -67,9 +49,9 @@ function Homepage() {
   // filter records by search text
   const filterData = (value) => {
     const lowercasedValue = value.toLowerCase().trim()
-    if (lowercasedValue === '') setFilteredData(originData)
+    if (lowercasedValue === '') setFilteredData(books)
     else {
-      const filteredData = originData.filter((item) => {
+      const filteredData = books.filter((item) => {
         return Object.keys(item).some((key) =>
           excludeColumns.includes(key)
             ? false
@@ -86,12 +68,12 @@ function Homepage() {
       <section className={classes.container}>
         <div className={classes.productlist}>
           {isError && (
-            <div>
+            <p className={classes.statusIndicator}>
               Une erreur est survenue, veuillez rafraîchir votre page...
-            </div>
+            </p>
           )}
           {isLoading ? (
-            <p>Ressources en chargement</p>
+            <p className={classes.statusIndicator}>Ressources en chargement</p>
           ) : (
             filteredData.map((book, i) => <Product key={i} {...book} />)
           )}

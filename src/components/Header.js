@@ -72,6 +72,7 @@ const useStyles = createUseStyles((theme) => ({
     display: 'flex',
     padding: `0 ${theme.spaces.md}`,
     '& > a': {
+      position: 'relative',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
@@ -83,6 +84,22 @@ const useStyles = createUseStyles((theme) => ({
         fontSize: theme.texts.sm,
       },
     },
+  },
+  amount: {
+    position: 'absolute',
+    top: 12,
+    right: -9,
+    width: 19,
+    height: 19,
+    backgroundColor: theme.colors.yellow,
+    color: theme.colors.blue,
+    fontSize: theme.texts.xs,
+    fontWeight: 600,
+    border: `2px solid ${theme.colors.blue}`,
+    borderRadius: '50%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 }))
 
@@ -107,12 +124,12 @@ function Header({ setValues }) {
           </div>
           <nav className={classes.menu}>
             <NavLink exact to="/" activeClassName="is-active">
-              <span>home</span>
+              <span>Shop</span>
               <FiShoppingBag />
             </NavLink>
             <NavLink to="/checkout" activeClassName="is-active">
               <span>Cart</span>
-              {basket?.length}
+              <span className={classes.amount}>{basket?.length}</span>
               <FiShoppingCart />
             </NavLink>
           </nav>
