@@ -132,11 +132,11 @@ function Header({ setValues }) {
           )}
           <nav className={classes.menu}>
             <NavLink exact to="/" activeClassName="is-active">
-              <span>Shop</span>
+              <span>Boutique</span>
               <FiShoppingBag />
             </NavLink>
             <NavLink to="/checkout" activeClassName="is-active">
-              <span>Cart</span>
+              <span>Panier</span>
               <span className={classes.amount}>{basket?.length}</span>
               <FiShoppingCart />
             </NavLink>

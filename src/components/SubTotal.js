@@ -65,14 +65,15 @@ function SubTotal() {
           renderText={(value) => (
             <>
               <p>
-                Subtotal ({basket?.length} items):
+                Sous-total ({basket?.length}
+                {basket.length <= 1 ? 'article' : 'articles'}):
                 <strong className={classes.total}>{value}</strong>
               </p>
               <small className={classes.gift}>
                 <input type="checkbox" />
-                this order contain a gift
+                commande contenant cadeau.
               </small>
-              <Button model="primary">Procced to checkout</Button>
+              <Button model="primary">Passer la commande</Button>
             </>
           )}
           decialScale={2}

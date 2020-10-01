@@ -102,10 +102,12 @@ function Checkout() {
                   Publicis Sapient Engineering
                 </span>
               </div>
-              <Button model="secondary">En savoir plus :)</Button>
+              <Button model="secondary" cb={() => alert('love you guys :)')}>
+                En savoir plus
+              </Button>
             </div>
             <div className={classes.basket}>
-              <h2 className={classes.title}>Your Shopping Basket</h2>
+              <h2 className={classes.title}>votre panier de course.</h2>
               <div className={classes.productList}>
                 {basket?.length ? (
                   basket.map((item, i) => <BasketProduct key={i} {...item} />)
