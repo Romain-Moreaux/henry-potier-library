@@ -1,6 +1,6 @@
 import React from 'react'
 import { createUseStyles } from 'react-jss'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import { ReactComponent as Books } from '../assets/book.svg'
 import { FiShoppingCart } from 'react-icons/fi'
 import { FiShoppingBag } from 'react-icons/fi'
@@ -9,7 +9,7 @@ import { useBasketContext } from './Basket'
 const useStyles = createUseStyles((theme) => ({
   header: {
     backgroundColor: theme.colors.blue,
-    padding: `${theme.spaces.lg} 0`,
+    padding: `${theme.spaces.sm} 0`,
     color: theme.colors.whiteAlt,
   },
   container: {
@@ -27,8 +27,8 @@ const useStyles = createUseStyles((theme) => ({
       height: 24,
       objectFit: 'contain',
       [`@media (min-width: ${theme.breakpoints.md}px)`]: {
-        width: 32,
-        height: 32,
+        width: 36,
+        height: 36,
       },
     },
     '& .is-active': {
@@ -36,19 +36,24 @@ const useStyles = createUseStyles((theme) => ({
     },
   },
   logo: {
-    ...theme.displays.flexCenter,
-    flexBasis: '100%',
-    justifyContent: 'center',
+    display: 'flex',
+    flex: 1,
+    alignItems: 'center',
     marginBottom: theme.spaces.sm,
     '& span': {
+      display: 'none',
       fontSize: theme.texts.lg,
       fontWeight: 300,
       marginLeft: theme.spaces.md,
+      [`@media (min-width: ${theme.breakpoints.md}px)`]: {
+        display: 'flex',
+      },
     },
+    '& > svg': { width: 48, height: 48 },
     [`@media (min-width: ${theme.breakpoints.md}px)`]: {
-      flexBasis: 'auto',
+      flex: 1,
       '& span': {
-        fontSize: theme.texts.xxl,
+        fontSize: theme.texts.xl,
       },
     },
   },
@@ -106,6 +111,7 @@ const useStyles = createUseStyles((theme) => ({
 function Header({ setValues }) {
   const classes = useStyles()
   const [{ basket }] = useBasketContext()
+  const location = useLocation()
   const handleChange = (e) => setValues(e.target.value)
 
   return (
@@ -115,13 +121,15 @@ function Header({ setValues }) {
           <div className={classes.logo}>
             <Books /> <span>la bibliothèque d'Henri Potier</span>
           </div>
-          <div className={classes.searchBar}>
-            <input
-              onChange={handleChange}
-              type="text"
-              placeholder="search by keyword..."
-            />
-          </div>
+          {location.pathname === '/' && (
+            <div className={classes.searchBar}>
+              <input
+                onChange={handleChange}
+                type="text"
+                placeholder="search by keyword..."
+              />
+            </div>
+          )}
           <nav className={classes.menu}>
             <NavLink exact to="/" activeClassName="is-active">
               <span>Shop</span>

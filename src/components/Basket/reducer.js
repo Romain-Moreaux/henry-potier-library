@@ -1,8 +1,5 @@
-import books from '../../assets/books.json'
-
 export const initialState = {
-  // basket: [],
-  basket: [books[0], books[1], books[2]],
+  basket: [],
 }
 
 export const getBasketTotal = (basket) =>
@@ -15,34 +12,20 @@ export const getCommercialOffers = (basket) =>
   )
 
 export const getTotalwithBestOffer = (offers, total) => {
-  console.log('offers', offers)
-  console.log('total', total)
+  if (!offers || !total) return 0
 
-  let bestOfferApplied
+  let bestDiscount = offers.reduce((prev, current) => {
+    let discount =
+      current.type === 'slice'
+        ? Math.ceil(total / current.sliceValue) * current.value
+        : current.value
+    return prev > discount ? prev : discount
+  }, 0)
 
-  if (total > 100) {
-    bestOfferApplied = offers.forEach(
-      (offer) =>
-        offer.type === 'slice' &&
-        Math.round(total / offer.sliceValue) * offer.value
-    )
-    console.log('bestoffer', bestOfferApplied)
-    // return (
-    //   total -
-    //   Math.round(total / bestOfferApplied.sliceValue) * bestOfferApplied.value
-    // )
-  } else {
-    bestOfferApplied = offers?.reduce((prev, current) => {
-      return prev.value > current.value ? prev.value : current.value
-    })
-    console.log('bestoffer', bestOfferApplied)
-    // return total - bestOfferApplied.value
-  }
-  return total - bestOfferApplied
+  return total - bestDiscount
 }
 
 const reducer = (state, action) => {
-  console.log(action)
   switch (action.type) {
     case 'ADD_TO_BASKET':
       return {
@@ -56,7 +39,7 @@ const reducer = (state, action) => {
       }
 
     default:
-      break
+      return state
   }
 }
 
