@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { createUseStyles } from 'react-jss'
 import CurrencyFormat from 'react-currency-format'
 import Button from './Button'
@@ -16,11 +16,14 @@ const useStyles = createUseStyles((theme) => ({
     flexDirection: 'column',
     justifyContent: 'space-between',
     padding: theme.spaces.md,
-
     backgroundColor: theme.colors.grey,
     border: `1px solid ${theme.colors.grey}`,
-    borderRadius: 4,
     '& p': { color: theme.colors.raven },
+    [`@media (min-width: ${theme.breakpoints.md}px)`]: {
+      borderRadius: 4,
+      position: 'sticky',
+      top: 40,
+    },
   },
   total: {
     marginLeft: theme.spaces.md,
@@ -37,30 +40,16 @@ function SubTotal() {
   const classes = useStyles()
   const [{ basket }] = useBasketContext()
 
-  let isError,
-    isLoading = false
-  let offers = [
-    {
-      type: 'percentage',
-      value: 5,
-    },
-    {
-      type: 'minus',
-      value: 15,
-    },
-    {
-      type: 'slice',
-      sliceValue: 100,
-      value: 12,
-    },
-  ]
+  const [{ data, isLoading, isError }, doFetch] = useFetchApi()
 
-  // const [{ data, isLoading, isError }] = useFetchApi(
-  //   `http://henri-potier.xebia.fr/books/${getCommercialOffers(
-  //     basket
-  //   )}/commercialOffers`,
-  //   []
-  // )
+  useEffect(() => {
+    if (basket.length)
+      doFetch(
+        `http://henri-potier.xebia.fr/books/${getCommercialOffers(
+          basket
+        )}/commercialOffers`
+      )
+  }, [basket, doFetch])
 
   return (
     <div className={classes.subtotal}>
@@ -87,7 +76,7 @@ function SubTotal() {
             </>
           )}
           decialScale={2}
-          value={getTotalwithBestOffer(offers, getBasketTotal(basket))}
+          value={getTotalwithBestOffer(data?.offers, getBasketTotal(basket))}
           displayType={'text'}
           thousandSeparator={true}
           prefix={'€'}

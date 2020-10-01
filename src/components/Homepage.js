@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { createUseStyles } from 'react-jss'
 import Header from './Header'
 import Product from './Product'
-// import useFetchApi from './useFetch'
-import books from '../assets/books.json'
+import useFetchApi from './useFetch'
+
 const useStyles = createUseStyles((theme) => ({
   homepage: {
     ...theme.displays.page,
@@ -29,16 +29,15 @@ const useStyles = createUseStyles((theme) => ({
 function Homepage() {
   const classes = useStyles()
   const [filteredData, setFilteredData] = useState([])
-  let isError,
-    isLoading = false
-  // const [{ data, isLoading, isError }] = useFetchApi(
-  //   'http://henri-potier.xebia.fr/books',
-  //   []
-  // )
+
+  const [{ data, isLoading, isError }] = useFetchApi(
+    'http://henri-potier.xebia.fr/books',
+    []
+  )
 
   useEffect(() => {
-    setFilteredData(books)
-  }, [])
+    setFilteredData(data)
+  }, [data])
 
   // exclude column list from filter
   const excludeColumns = ['cover', 'isbn']
@@ -49,9 +48,9 @@ function Homepage() {
   // filter records by search text
   const filterData = (value) => {
     const lowercasedValue = value.toLowerCase().trim()
-    if (lowercasedValue === '') setFilteredData(books)
+    if (lowercasedValue === '') setFilteredData(data)
     else {
-      const filteredData = books.filter((item) => {
+      const filteredData = data.filter((item) => {
         return Object.keys(item).some((key) =>
           excludeColumns.includes(key)
             ? false

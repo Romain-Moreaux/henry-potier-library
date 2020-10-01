@@ -13,9 +13,7 @@ const useFetchApi = (initialUrl, initialData) => {
       setIsLoading(true)
 
       try {
-        console.log('fetching datas')
         const result = await Axios(url)
-
         setData(result.data)
       } catch (error) {
         setIsError(true)
@@ -23,8 +21,7 @@ const useFetchApi = (initialUrl, initialData) => {
 
       setIsLoading(false)
     }
-
-    fetchData()
+    if (url) fetchData()
   }, [url])
 
   return [{ data, isLoading, isError }, setUrl]

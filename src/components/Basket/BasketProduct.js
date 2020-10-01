@@ -8,10 +8,9 @@ const useStyles = createUseStyles((theme) => ({
     display: 'flex',
   },
   cover: {
-    flex: 1,
     '& > img': {
       objectFit: 'cover',
-      maxHeight: 205,
+      maxHeight: 150,
     },
   },
   informations: {
@@ -21,6 +20,7 @@ const useStyles = createUseStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     textAlign: 'center',
+    paddingLeft: theme.spaces.lg,
   },
   title: {
     fontSize: theme.texts.md,
