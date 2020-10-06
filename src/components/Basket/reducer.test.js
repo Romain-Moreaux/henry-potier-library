@@ -39,7 +39,6 @@ const offers = [
     value: 12,
   },
 ]
-
 test('test getBasketTotal', () => {
   expect(getBasketTotal(null)).toBe(undefined)
 })

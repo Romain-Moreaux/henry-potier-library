@@ -15,11 +15,19 @@ export const getTotalwithBestOffer = (offers, total) => {
   if (!offers || !total) return 0
 
   let bestDiscount = offers.reduce((prev, current) => {
-    let discount =
-      current.type === 'slice'
-        ? Math.ceil(total / current.sliceValue) * current.value
-        : current.value
-    return prev > discount ? prev : discount
+    let temp
+    // let discount =
+    //   current.type === 'slice'
+    //     ? Math.ceil(total / current.sliceValue) * current.value
+    //     : current.value
+    if (current.type === 'slice') {
+      temp = Math.ceil(total / current.sliceValue) * current.value
+    } else if (current.type === 'percentage') {
+      temp = (total * current.value) / 100
+    } else {
+      temp = current.value
+    }
+    return prev > temp ? prev : temp
   }, 0)
 
   return total - bestDiscount

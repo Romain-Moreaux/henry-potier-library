@@ -50,7 +50,7 @@ function SubTotal() {
         )}/commercialOffers`
       )
   }, [basket, doFetch])
-
+  console.log(basket)
   return (
     <div className={classes.subtotal}>
       {isError && (
