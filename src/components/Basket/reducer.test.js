@@ -1,5 +1,9 @@
-const { useBasketContext } = require('./BasketProvider')
-const { getTotalwithBestOffer, getBasketTotal } = require('./reducer')
+const {
+  getTotalwithBestOffer,
+  getBasketTotal,
+  getCommercialOffers,
+} = require('./reducer')
+
 const items = [
   {
     isbn: 'a460afed-e5e7-4e39-a39d-c885c05db861',
@@ -14,7 +18,7 @@ const items = [
   {
     isbn: 'fcd1e6fa-a63f-4f75-9da4-b560020b6acc',
     title: "Henri Potier et le Prisonnier d'Azkaban",
-    price: 30,
+    price: 35,
     cover: 'http://henri-potier.xebia.fr/hp2.jpg',
     synopsis: [
       "Durant l'été, pour son treizième anniversaire, Henri reçoit plusieurs cartes de ses amis, notamment une lettre de Ron qui lui écrit d'Égypte, où il passe ses vacances avec sa famille. Une lettre du professeur McGonagall, directrice adjointe de Poudlard, lui informe que les élèves de troisième année auront la possibilité de visiter le village de Pré-au-Lard.",
@@ -39,14 +43,21 @@ const offers = [
     value: 12,
   },
 ]
-test('test getBasketTotal', () => {
-  expect(getBasketTotal(null)).toBe(undefined)
+
+test('getBasketTotal #1', () => {
+  expect(getBasketTotal([])).toBe(0)
 })
 
-test('test getBasketTotal array', () => {
-  expect(getBasketTotal(items)).toBe(60)
+test('getBasketTotal #2', () => {
+  expect(getBasketTotal(items)).toBe(65)
 })
 
-test('test getTotalwithBestOffer', () => {
-  expect(getTotalwithBestOffer(offers, 60)).toBe(55)
+test('getTotalwithBestOffer #1', () => {
+  expect(getTotalwithBestOffer(offers, 400)).toBe(352)
+})
+
+test('getCommercialOffers #1', () => {
+  expect(getCommercialOffers(items)).toContain(
+    'a460afed-e5e7-4e39-a39d-c885c05db861,fcd1e6fa-a63f-4f75-9da4-b560020b6acc'
+  )
 })

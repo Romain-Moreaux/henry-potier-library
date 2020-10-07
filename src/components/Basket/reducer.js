@@ -12,22 +12,18 @@ export const getCommercialOffers = (basket) =>
   )
 
 export const getTotalwithBestOffer = (offers, total) => {
-  if (!offers || !total) return 0
+  if (!Array.isArray(offers) || !offers.length || typeof total !== 'number')
+    return 0
 
   let bestDiscount = offers.reduce((prev, current) => {
-    let temp
-    // let discount =
-    //   current.type === 'slice'
-    //     ? Math.ceil(total / current.sliceValue) * current.value
-    //     : current.value
-    if (current.type === 'slice') {
-      temp = Math.ceil(total / current.sliceValue) * current.value
-    } else if (current.type === 'percentage') {
-      temp = (total * current.value) / 100
-    } else {
-      temp = current.value
-    }
-    return prev > temp ? prev : temp
+    let discount
+    if (current.type === 'slice')
+      discount = Math.ceil(total / current.sliceValue) * current.value
+    else if (current.type === 'percentage')
+      discount = (total * current.value) / 100
+    else discount = current.value
+
+    return prev > discount ? prev : discount
   }, 0)
 
   return total - bestDiscount
